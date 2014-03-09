@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package breakingbadgame;
 
 import java.awt.Image;
@@ -14,7 +13,8 @@ import javax.swing.ImageIcon;
  *
  * @author roelcastano
  */
-public class Meth extends Base{
+public class Meth extends Base {
+
     protected Animacion animMeth; //animacion del carro
     private int posX;    //posicion en x.       
     private int posY;    //posicion en y.
@@ -59,14 +59,12 @@ public class Meth extends Base{
     public int getAlto() {
         return (new ImageIcon(animMeth.getImagen())).getIconHeight();
     }
-    
-    public boolean isDestroyed()
-    {
+
+    public boolean isDestroyed() {
         return destroyed;
     }
-    
-    public void setDestroyed(boolean destroyed)
-    {
+
+    public void setDestroyed(boolean destroyed) {
         this.destroyed = destroyed;
     }
 

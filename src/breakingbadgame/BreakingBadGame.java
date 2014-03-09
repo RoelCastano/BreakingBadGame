@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package breakingbadgame;
 
 /**
@@ -21,5 +20,5 @@ public class BreakingBadGame {
         juego.setVisible(true); //Hace que se vea el jframe
         juego.setSize(640, 700); //Ajusta el tamaño inicial del jframe        
     }
-    
+
 }

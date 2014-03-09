@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package breakingbadgame;
 
 import java.awt.Image;
@@ -11,47 +10,39 @@ import java.awt.Toolkit;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-
-
 public class Bola extends Base {
 
-   private int xdir;
-   private int ydir;
-   private Animacion animBola;
-   protected int posX;
-   protected int posY;
-   private int velocidadY;
-   private int velocidadX;
+    private int xdir;
+    private int ydir;
+    private Animacion animBola;
+    protected int posX;
+    protected int posY;
+    private int velocidadY;
+    private int velocidadX;
 
-   //protected String ball = "../images/ball.png";
-   
-   
+     //protected String ball = "../images/ball.png";
     /**
      * Metodo constructor usado para crear el objeto
      *
      * @param posX es la <code>posicion en x</code> del objeto.
      * @param posY es la <code>posicion en y</code> del objeto.
      */
+    public Bola(int posX, int posY, int velX, int velY) {
+        super(posX, posY);
+        velocidadX = velX;
+        velocidadY = velY;
+        Image bola = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../images/pizza.png"));
 
-   public Bola(int posX, int posY,int velX, int velY) {
-     super(posX, posY);
-     velocidadX = velX;
-     velocidadY = velY;
-     Image bola = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../images/pizza.png"));
-     
 //ImageIcon ii = new ImageIcon(this.getClass().getResource(ball));
 //anim = ii.getImage();
-
 //     width = image.getWidth(null);
 //     heigth = image.getHeight(null);
-     
-             //Se crea la animación
+        //Se crea la animación
         animBola = new Animacion();
         animBola.sumaCuadro(bola, 100);
 
-     resetState();
+        resetState();
     }
-
 
 //    public void move()
 //    {
@@ -70,13 +61,11 @@ public class Bola extends Base {
 //        setYDir(1);
 //      }
 //    }
-
-    public void resetState() 
-    {
-      posX = 230;
-      posY = 355;
+    public void resetState() {
+        posX = 230;
+        posY = 355;
     }
-    
+
     /**
      * Metodo de acceso que regresa la velocidad en y del objeto
      *
@@ -112,7 +101,7 @@ public class Bola extends Base {
     public void setVelocidadY(int t) {
         velocidadY = t;
     }
-    
+
     /**
      * Metodo de acceso que regresa el ancho del icono
      *
@@ -133,8 +122,6 @@ public class Bola extends Base {
         return (new ImageIcon(animBola.getImagen()).getIconHeight());
     }
 
-
-
     /**
      * Metodo de acceso que regresa la imagen del icono
      *
@@ -144,6 +131,5 @@ public class Bola extends Base {
     public Image getImagen() {
         return (new ImageIcon(animBola.getImagen())).getImage();
     }
-    
 
 }
