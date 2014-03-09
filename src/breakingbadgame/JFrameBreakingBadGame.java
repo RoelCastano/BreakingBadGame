@@ -7,6 +7,7 @@
 package breakingbadgame;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -38,6 +39,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private LinkedList meths;
     private int methsPorLinea;
     int velBola;
+    int vidas;
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -319,6 +321,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      * @param g es el <code>objeto grafico</code> usado para dibujar.
      */
     public void paint1(Graphics g) {
+	g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
@@ -327,6 +330,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 Meth meth1 = (Meth) meths.get(i);
                 g.drawImage(meth1.getImagen(), meth1.getPosX(), meth1.getPosY(), this);
             }
+            g.drawString("Vidas: "+vidas, 20, 20);
             if (instrucciones) {
                 g.drawString("      INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
                 g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
