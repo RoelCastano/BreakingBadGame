@@ -35,6 +35,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private int numMeths;
     private Bola bola;  //creacion del objeto bola
     private LinkedList meths;
+    int velBola;
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -50,6 +51,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void init() {
         setSize(640, 700);
         pausa = false;
+        velBola = 5;
         int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
         int posY = (int) (getHeight() - 60);    // posicion en y del carro
         background = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/background.jpg"));
@@ -65,7 +67,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
-        bola = new Bola(100, 100, 3, 3);
+        bola = new Bola(100, 100, velBola, velBola);
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
         addKeyListener(this);
@@ -175,13 +177,13 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         }
         //Colision de la bola con el JFrame
         if (bola.getPosX() <= 0) {
-            bola.setVelocidadX(3);
+            bola.setVelocidadX(velBola);
         }
         if (bola.getPosX() >= getWidth() ) { 
-            bola.setVelocidadX(-3);
+            bola.setVelocidadX(-velBola);
         }
         if (bola.getPosY() <= 20 ) {
-            bola.setVelocidadY(3);
+            bola.setVelocidadY(velBola);
         }
         //Colision del bate con la bola
 
@@ -198,39 +200,36 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             int fourth = bateLPos + (zona*4);
 
             if (bolaLPos < first) {
-                bola.setVelocidadX(-3);
-                bola.setVelocidadY(-3);
+                bola.setVelocidadX(-velBola);
+                bola.setVelocidadY(-velBola);
             }
 
             if (bolaLPos >= first && bolaLPos < second) {
-                bola.setVelocidadX(-3);
+                bola.setVelocidadX(-velBola);
                 if (bola.getVelocidadY()>0)
-                    bola.setVelocidadY(-3);
+                    bola.setVelocidadY(-velBola);
                 else
-                    bola.setVelocidadY(3);
+                    bola.setVelocidadY(velBola);
             }
 
             if (bolaLPos >= second && bolaLPos < third) {
                 bola.setVelocidadX(0);
-                bola.setVelocidadY(-3);
+                bola.setVelocidadY(-velBola);
             }
 
             if (bolaLPos >= third && bolaLPos < fourth) {
-                bola.setVelocidadX(3);
+                bola.setVelocidadX(velBola);
                 if (bola.getVelocidadY()>0)
-                    bola.setVelocidadY(-3);
+                    bola.setVelocidadY(-velBola);
                 else
-                    bola.setVelocidadY(3);
+                    bola.setVelocidadY(velBola);
             }
 
             if (bolaLPos > fourth) {
-                bola.setVelocidadX(3);
-                bola.setVelocidadY(-3);
+                bola.setVelocidadX(velBola);
+                bola.setVelocidadY(-velBola);
             }
-
-
         }
-            
     }
 
     
@@ -317,7 +316,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void paint1(Graphics g) {
         if (bate != null) {
-            g.drawImage(background, 0, -20, this);
+            g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
             g.drawImage(bola.getImagen(), bola.getPosX(), bola.getPosY(), this);
             for (int i = 0; i < numMeths; i++) {
