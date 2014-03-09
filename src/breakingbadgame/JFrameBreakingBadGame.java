@@ -158,13 +158,13 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             bate.setPosX(0);
         }
         //Colision de la bola con el JFrame
-        if (bola.getPosX() == 0) {
+        if (bola.getPosX() <= 0) {
             bola.setVelocidadX(3);
         }
         if (bola.getPosX() >= getWidth() ) { 
             bola.setVelocidadX(-3);
         }
-        if (bola.getPosY() <= 0 ) {
+        if (bola.getPosY() <= 10 ) {
             bola.setVelocidadY(3);
         }
         //Colision del bate con la bola
