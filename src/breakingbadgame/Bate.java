@@ -24,7 +24,7 @@ public class Bate extends Base {
         super(posX, posY);	//constructor
 
         //Se cargan las imágenes(cuadros) para la animación del malo
-        Image paddle1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/paddle.png"));
+        Image paddle1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/minivan.png"));
         //Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
         //Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/2.gif"));
         //Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/3.gif"));
