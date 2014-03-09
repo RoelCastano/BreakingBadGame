@@ -53,7 +53,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
-        numMeths = 10;
+        numMeths = 40;
         meths = new LinkedList();
         for (int i = 0; i < numMeths; i++) {
             int a = i % 10;
