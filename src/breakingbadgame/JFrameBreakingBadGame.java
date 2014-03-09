@@ -76,7 +76,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
-        bola = new Bola(100, 100, velBola, velBola);
+        bola = new Bola(getWidth()/2, getHeight()-30, velBola, velBola);
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
         addKeyListener(this);
