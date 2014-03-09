@@ -29,8 +29,6 @@ public class Bola extends Base {
      *
      * @param posX es la <code>posicion en x</code> del objeto.
      * @param posY es la <code>posicion en y</code> del objeto.
-     * @param velX es la <code>velocidad en x</code> del objeto.
-     * @param velY es la <code>velocidad en Y</code> del objeto.
      */
 
    public Bola(int posX, int posY) {
