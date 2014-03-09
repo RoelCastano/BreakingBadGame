@@ -10,6 +10,6 @@ package breakingbadgame;
  *
  * @author roelcastano
  */
-public class Panel {
+public class Board {
     
 }
