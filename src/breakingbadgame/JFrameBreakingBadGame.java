@@ -134,7 +134,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 }
                 
             } else {
-                
+                gameOver = true;
             }
             
             repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
@@ -376,7 +376,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void paint1(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
-        g.setColor(Color.white);							// black font
+        g.setColor(Color.black);							// black font
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
@@ -395,6 +395,9 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             }
             if (pausa) {
                 g.drawString("PAUSA", bate.getPosX() + bate.getAncho(), bate.getPosY());
+            }
+            if (gameOver) {
+                g.drawString("GAME OVER", getWidth()/2-40, getHeight()/2);
             }
         } else {
             //Da un mensaje mientras se carga el dibujo	
