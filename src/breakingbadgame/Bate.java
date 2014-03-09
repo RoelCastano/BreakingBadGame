@@ -15,7 +15,7 @@ import javax.swing.ImageIcon;
  * @author roelcastano
  */
 public class Bate extends Base {
-    protected Animacion animBabe; //animacion del carro
+    protected Animacion animBate; //animacion del carro
     private int posX;    //posicion en x.       
     private int posY;    //posicion en y.
 
@@ -24,19 +24,19 @@ public class Bate extends Base {
         super(posX, posY);	//constructor
 
         //Se cargan las imágenes(cuadros) para la animación del malo
-        Image bueno1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/0.gif"));
-        Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
-        Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/2.gif"));
-        Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/3.gif"));
-        Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/4.gif"));
+        Image paddle1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/paddle.png"));
+        //Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
+        //Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/2.gif"));
+        //Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/3.gif"));
+        //Image bueno5 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/4.gif"));
 
         //Se crea una nueva animacion con la inizialicacion dada
-        animBabe = new Animacion();
-        animBabe.sumaCuadro(bueno1, 100);
-        animBabe.sumaCuadro(bueno2, 100);
-        animBabe.sumaCuadro(bueno3, 100);
-        animBabe.sumaCuadro(bueno4, 100);
-        animBabe.sumaCuadro(bueno5, 100);
+        animBate = new Animacion();
+        animBate.sumaCuadro(paddle1, 100);
+        //animPaddle.sumaCuadro(bueno2, 100);
+        //animBabe.sumaCuadro(bueno3, 100);
+        //animBabe.sumaCuadro(bueno4, 100);
+        //animBabe.sumaCuadro(bueno5, 100);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Bate extends Base {
      * icono.
      */
     public int getAncho() {
-        return (new ImageIcon(animBabe.getImagen())).getIconWidth();
+        return (new ImageIcon(animBate.getImagen())).getIconWidth();
     }
 
     /**
@@ -56,7 +56,7 @@ public class Bate extends Base {
      * icono.
      */
     public int getAlto() {
-        return (new ImageIcon(animBabe.getImagen())).getIconHeight();
+        return (new ImageIcon(animBate.getImagen())).getIconHeight();
     }
 
     /**
@@ -66,6 +66,6 @@ public class Bate extends Base {
      * icono.
      */
     public Image getImagen() {
-        return (new ImageIcon(animBabe.getImagen())).getImage();
+        return (new ImageIcon(animBate.getImagen())).getImage();
     }
 }

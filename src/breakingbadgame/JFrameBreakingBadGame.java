@@ -24,6 +24,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     boolean pausa; 
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
+    private Bate bate;
+    private int direccionBate; // Direccion del Bate
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -38,6 +40,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     
     public void init() {
         setSize(900, 700);
+        pausa = false;
+        int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
+        int posY = (int) (getHeight() - 60);    // posicion en y del carro
+        bate = new Bate(posX, posY);
+        direccionBate = 0;
 
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
@@ -89,19 +96,15 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         tiempoActual = System.currentTimeMillis();
         /*vidas>0 && */
         while (true) {
-            if (!pausa) {
-                actualiza();
-                checaColision();
-            } else {
+            actualiza();
+            checaColision();
+            repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
-                repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
-
-                try {
-                    // El thread se duerme.
-                    Thread.sleep(20);
-                } catch (InterruptedException ex) {
-                    System.out.println("Error en " + ex.toString());
-                }
+            try {
+                // El thread se duerme.
+                Thread.sleep(20);
+            } catch (InterruptedException ex) {
+                System.out.println("Error en " + ex.toString());
             }
         }
 
@@ -112,7 +115,24 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      *
      */
     public void actualiza() {
+        switch (direccionBate) {
+            case 3: {
+                bate.setPosX(bate.getPosX() - 5);
+                break;    //se mueve hacia abajo izquierda
+            }
+            case 4: {
+                bate.setPosX(bate.getPosX() + 5);
+                break;    //se mueve hacia arriba izquierda	
+            }
+        }
+        long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
 
+        //Guarda el tiempo actual
+        tiempoActual += tiempoTranscurrido;
+        //Actualiza la animación en base al tiempo transcurrido
+        if (direccionBate != 0) {
+            bate.animBate.actualiza(tiempoTranscurrido);  //cuando el carro no se mueve, no se anima
+        }
     }
 
     /**
@@ -123,28 +143,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         //Colision del bueno con el Applet 
     }
 
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    public void mouseReleased(MouseEvent e) {
-    }
-
-    public void mouseMoved(MouseEvent e) {
-    }
-
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    public void mouseExited(MouseEvent e) {
-    }
-
-    public void mousePressed(MouseEvent e) {
-
-    }
-
+    
     /**
      * Metodo <I>update</I> sobrescrito de la clase <code>Applet</code>,
      * heredado de la clase Container.<P>
@@ -180,7 +179,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      * @param e es el <code>evento</code> generado al presionar las teclas.
      */
     public void keyPressed(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {    //Presiono flecha izquierda
+            direccionBate = 3;
+        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {    //Presiono flecha derecha
+            direccionBate = 4;
+        }
     }
 
     /**
@@ -204,6 +207,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      * @param e es el <code>evento</code> que se genera en al soltar las teclas.
      */
     public void keyReleased(KeyEvent e) {
+        direccionBate = 0;
     }
 
     /**
@@ -215,9 +219,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      * @param g es el <code>objeto grafico</code> usado para dibujar.
      */
     public void paint1(Graphics g) {
-
-        if (true) {
-
+        if (bate != null) {
+            g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
         } else {
             //Da un mensaje mientras se carga el dibujo	
             g.drawString("No se cargo la imagen..", 20, 20);
