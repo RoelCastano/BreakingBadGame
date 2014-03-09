@@ -54,8 +54,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     }
 
     public void init() {
-        setSize(640, 700);
-        pausa = false;
+        setSize(600, 700);
+        pausa = true;
         vidas = 3;
         velBola = 5;
         int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
@@ -63,7 +63,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         background = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/background.jpg"));
         bate = new Bate(posX, posY);
         direccionBate = 0;
-        instrucciones = false;
+        instrucciones = true;
         numMeths = 108;
         meths = new LinkedList();
         methEx = new Meth(0, 0);
@@ -75,7 +75,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
-        bola = new Bola(getWidth() / 2, getHeight() - 30, velBola, velBola);
+        bola = new Bola(getWidth() / 2, getHeight() - 100, velBola, velBola);
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
         addKeyListener(this);
@@ -334,6 +334,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             instrucciones = !instrucciones;
         }
         if (e.getKeyCode() == KeyEvent.VK_P) {
+            instrucciones = !instrucciones;
             pausa = !pausa;
         }
 
@@ -373,9 +374,10 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void paint1(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
-        g.setColor(Color.white);							// black font
+        //g.setColor(Color.white);							// black font
 
         g.setColor(Color.black);							// black font
+        
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
@@ -397,7 +399,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 g.drawString("> - Moverse a la Derecha", getWidth() / 2 - 80, getHeight() / 2 + 80);
             }
             if (pausa) {
-                g.drawString("PAUSA", bate.getPosX() + bate.getAncho(), bate.getPosY());
+                g.drawString("PAUSA", bate.getPosX() , bate.getPosY());
             }
             if (gameOver) {
                 g.drawString("GAME OVER", getWidth() / 2 - 40, getHeight() / 2);

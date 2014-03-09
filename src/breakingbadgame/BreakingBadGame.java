@@ -18,7 +18,7 @@ public class BreakingBadGame {
         // TODO code application logic here
         JFrameBreakingBadGame juego = new JFrameBreakingBadGame(); //Crea una variable de JFrameProjectX 
         juego.setVisible(true); //Hace que se vea el jframe
-        juego.setSize(640, 700); //Ajusta el tamaño inicial del jframe        
+        juego.setSize(600, 700); //Ajusta el tamaño inicial del jframe        
     }
 
 }
