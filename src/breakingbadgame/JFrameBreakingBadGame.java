@@ -30,9 +30,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private int direccionBate; // Direccion del Bate
     boolean instrucciones;
     private Meth meth;
+    private Meth methEx;
     private int numMeths;
     private Bola bola;  //creacion del objeto bola
     private LinkedList meths;
+    private int methsPorLinea;
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -53,12 +55,14 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
-        numMeths = 40;
+        numMeths = 20;
         meths = new LinkedList();
-        for (int i = 0; i < numMeths; i++) {
-            int a = i % 10;
-            int posMethX = 95 * a;
-            int posMethY = (int) (30 * floor((95 * i) / 950)) + 80 + (int) floor((95 * i) / 950) * 20;
+        methEx = new Meth(0,0);
+        methsPorLinea = getWidth() / (methEx.getAncho()+20);
+        for (int i = 1; i < numMeths+1; i++) {
+            int a = i % methsPorLinea;
+            int posMethX = (methEx.getAncho()+20) * (a-1);
+            int posMethY = ((int)(i / methsPorLinea))*40 + 40; //(int) (30 * floor((95 * i) / 950)) + 80 + (int) floor((95 * i) / 950) * 20;
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
