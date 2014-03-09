@@ -27,6 +27,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     
     private long tiempoActual; //Variable que guarda el tiempo para la animacion.
     boolean pausa; 
+    boolean gameOver;
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
     private Bate bate;
@@ -126,10 +127,16 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         tiempoActual = System.currentTimeMillis();
         /*vidas>0 && */
         while (true) {
-            if (!pausa) {
-                actualiza();
-                checaColision();
+            if (vidas > 0) {
+                if (!pausa) {
+                    actualiza();
+                    checaColision();
+                }
+                
+            } else {
+                
             }
+            
             repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
             try {
