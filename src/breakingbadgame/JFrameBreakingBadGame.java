@@ -56,6 +56,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void init() {
         setSize(640, 700);
         pausa = false;
+        vidas = 3;
         velBola = 5;
         int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
         int posY = (int) (getHeight() - 60);    // posicion en y del carro
@@ -191,6 +192,13 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         }
         if (bola.getPosY() <= 20 ) {
             bola.setVelocidadY(velBola);
+        }
+        if (bola.getPosY() > getHeight()){
+            vidas--;
+            bola.setPosX(getWidth()/2);
+            bola.setPosY(getHeight()/10 * 8);
+            bola.setVelocidadX(0);
+            bola.setVelocidadY(-velBola);
         }
         //Colision del bate con la bola
 
@@ -360,7 +368,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      * @param g es el <code>objeto grafico</code> usado para dibujar.
      */
     public void paint1(Graphics g) {
-	g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
+        g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
+        g.setColor(Color.white);							// black font
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
@@ -369,9 +378,9 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 Meth meth1 = (Meth) meths.get(i);
                 g.drawImage(meth1.getImagen(), meth1.getPosX(), meth1.getPosY(), this);
             }
-            g.drawString("Vidas: "+vidas, 20, 20);
+            g.drawString("Vidas: "+vidas, 40, getHeight()-20);
             if (instrucciones) {
-                g.drawString("      INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
+                g.drawString("INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
                 g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
                 g.drawString("I - Instrucciones", getWidth() / 2 - 80, getHeight() / 2 + 40);
                 g.drawString("< - Moverse a la Izquierda", getWidth() / 2 - 80, getHeight() / 2 + 60);
