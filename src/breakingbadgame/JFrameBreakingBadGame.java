@@ -9,6 +9,7 @@ package breakingbadgame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -31,6 +32,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     boolean instrucciones;
     private Meth meth;
     private Meth methEx;
+    private Image background;			// Imagen de fondo
     private int numMeths;
     private Bola bola;  //creacion del objeto bola
     private LinkedList meths;
@@ -48,20 +50,21 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     }
     
     public void init() {
-        setSize(900, 700);
+        setSize(640, 700);
         pausa = false;
         int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
         int posY = (int) (getHeight() - 60);    // posicion en y del carro
+        background = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/background.jpg"));
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
-        numMeths = 20;
+        numMeths = 108;
         meths = new LinkedList();
         methEx = new Meth(0,0);
-        methsPorLinea = getWidth() / (methEx.getAncho()+20);
-        for (int i = 1; i < numMeths+1; i++) {
+        methsPorLinea = getWidth() / (methEx.getAncho()+10);
+        for (int i = 0; i < numMeths+1; i++) {
             int a = i % methsPorLinea;
-            int posMethX = (methEx.getAncho()+20) * (a-1);
+            int posMethX = ((methEx.getAncho()+5) * (a))+(5*a) + 20;
             int posMethY = ((int)(i / methsPorLinea))*40 + 40; //(int) (30 * floor((95 * i) / 950)) + 80 + (int) floor((95 * i) / 950) * 20;
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
@@ -189,13 +192,14 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         
             if (bate.intersecta(bola)) {
 
-            int bateLPos = (int)bate.getPerimetro().getMinX();
-            int bolaLPos = (int)bola.getPerimetro().getMinX();
+            int bateLPos = bate.getPosX();/*(int)bate.getPerimetro().getMinX();*/
+            int bolaLPos = bola.getPosX();/*(int)bola.getPerimetro().getMinX();*/
+            int zona = bate.getAncho()/5;
 
-            int first = bateLPos + 8;
-            int second = bateLPos + 16;
-            int third = bateLPos + 24;
-            int fourth = bateLPos + 32;
+            int first = bateLPos + (zona);
+            int second = bateLPos + (zona*2);
+            int third = bateLPos + (zona*3);
+            int fourth = bateLPos + (zona*4);
 
             if (bolaLPos < first) {
                 bola.setVelocidadX(-3);
@@ -317,6 +321,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void paint1(Graphics g) {
         if (bate != null) {
+            g.drawImage(background, 0, -20, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
             g.drawImage(bola.getImagen(), bola.getPosX(), bola.getPosY(), this);
             for (int i = 0; i < numMeths; i++) {
