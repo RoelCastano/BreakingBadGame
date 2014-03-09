@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -194,16 +195,18 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         //Colision del bate con la bola
 
         
-            if (bate.intersecta(bola)) {
+        if (bate.intersecta(bola)) {
 
             int bateLPos = bate.getPosX();/*(int)bate.getPerimetro().getMinX();*/
+
             int bolaLPos = bola.getPosX();/*(int)bola.getPerimetro().getMinX();*/
-            int zona = bate.getAncho()/5;
+
+            int zona = bate.getAncho() / 5;
 
             int first = bateLPos + (zona);
-            int second = bateLPos + (zona*2);
-            int third = bateLPos + (zona*3);
-            int fourth = bateLPos + (zona*4);
+            int second = bateLPos + (zona * 2);
+            int third = bateLPos + (zona * 3);
+            int fourth = bateLPos + (zona * 4);
 
             if (bolaLPos < first) {
                 bola.setVelocidadX(-velBola);
@@ -212,10 +215,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
 
             if (bolaLPos >= first && bolaLPos < second) {
                 bola.setVelocidadX(-velBola);
-                if (bola.getVelocidadY()>0)
+                if (bola.getVelocidadY() > 0) {
                     bola.setVelocidadY(-velBola);
-                else
+                } else {
                     bola.setVelocidadY(velBola);
+                }
             }
 
             if (bolaLPos >= second && bolaLPos < third) {
@@ -225,15 +229,50 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
 
             if (bolaLPos >= third && bolaLPos < fourth) {
                 bola.setVelocidadX(velBola);
-                if (bola.getVelocidadY()>0)
+                if (bola.getVelocidadY() > 0) {
                     bola.setVelocidadY(-velBola);
-                else
+                } else {
                     bola.setVelocidadY(velBola);
+                }
             }
 
             if (bolaLPos > fourth) {
                 bola.setVelocidadX(velBola);
                 bola.setVelocidadY(-velBola);
+            }
+        }
+        
+        for (int i = 0; i < numMeths; i++) {
+            meth = (Meth) meths.get(i);
+            if (bola.intersecta(meth)) {
+
+                int bolaLeft = (int) bola.getPosX();
+                int bolaHeight = (int) bola.getAlto();
+                int bolaWidth = (int) bola.getAncho();
+                int bolaTop = (int) bola.getPosY();
+
+                Point pointRight
+                        = new Point(bolaLeft + bolaWidth + velBola, bolaTop);
+                Point pointLeft = new Point(bolaLeft - velBola, bolaTop);
+                Point pointTop = new Point(bolaLeft, bolaTop - velBola);
+                Point pointBottom
+                        = new Point(bolaLeft, bolaTop + bolaHeight + velBola);
+
+                if (!meth.isDestroyed()) {
+                    if (meth.getPerimetro().contains(pointRight)) {
+                        bola.setVelocidadX(-velBola);
+                    } else if (meth.getPerimetro().contains(pointLeft)) {
+                        bola.setVelocidadX(velBola);
+                    }
+
+                    if (meth.getPerimetro().contains(pointTop)) {
+                        bola.setVelocidadY(velBola);
+                    } else if (meth.getPerimetro().contains(pointBottom)) {
+                        bola.setVelocidadY(-velBola);
+                    }
+
+                    meth.setDestroyed(true);
+                }
             }
         }
     }

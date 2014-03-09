@@ -18,11 +18,12 @@ public class Meth extends Base{
     protected Animacion animMeth; //animacion del carro
     private int posX;    //posicion en x.       
     private int posY;    //posicion en y.
+    boolean destroyed;
 
     public Meth(int posX, int posY) {
 
         super(posX, posY);	//constructor
-
+        destroyed = false;
         //Se cargan las imágenes(cuadros) para la animación del malo
         Image meth1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/brickie.png"));
         //Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
@@ -57,6 +58,16 @@ public class Meth extends Base{
      */
     public int getAlto() {
         return (new ImageIcon(animMeth.getImagen())).getIconHeight();
+    }
+    
+    public boolean isDestroyed()
+    {
+        return destroyed;
+    }
+    
+    public void setDestroyed(boolean destroyed)
+    {
+        this.destroyed = destroyed;
     }
 
     /**
