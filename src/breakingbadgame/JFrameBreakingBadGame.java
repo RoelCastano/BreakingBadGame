@@ -48,7 +48,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
-        bola = new Bola(100, 100);
+        bola = new Bola(100, 100, -1, -1);
 
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
