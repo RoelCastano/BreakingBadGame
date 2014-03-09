@@ -37,7 +37,7 @@ public class Bola extends Base {
      super(posX, posY);
      velocidadX = velX;
      velocidadY = velY;
-     Image bola = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../images/ball.png"));
+     Image bola = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../images/pizza.png"));
      
 //ImageIcon ii = new ImageIcon(this.getClass().getResource(ball));
 //anim = ii.getImage();
