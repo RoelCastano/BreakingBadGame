@@ -53,7 +53,6 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
-        bola = new Bola(100, 100);
         numMeths = 10;
         meths = new LinkedList();
         for (int i = 0; i < numMeths; i++) {
@@ -63,6 +62,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
+        bola = new Bola(100, 100, 3, 3);
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
         addKeyListener(this);
@@ -144,6 +144,10 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 break;    //se mueve hacia arriba izquierda	
             }
         }
+        bola.setPosX(bola.getPosX()+bola.getVelocidadX());
+        bola.setPosY(bola.getPosY()+bola.getVelocidadY());
+        
+
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
 
         //Guarda el tiempo actual
@@ -166,6 +170,22 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         if (bate.getPosX() < 0) {
             bate.setPosX(0);
         }
+        //Colision de la bola con el JFrame
+        if (bola.getPosX() == 0) {
+            bola.setVelocidadX(3);
+        }
+        if (bola.getPosX() >= getWidth() ) { 
+            bola.setVelocidadX(-3);
+        }
+        if (bola.getPosY() <= 0 ) {
+            bola.setVelocidadY(3);
+        }
+        //Colision del bate con la bola
+        if (bate.intersecta(bola)) {
+            bola.setVelocidadX(+3);
+            bola.setVelocidadY(-3);
+        }
+            
     }
 
     
