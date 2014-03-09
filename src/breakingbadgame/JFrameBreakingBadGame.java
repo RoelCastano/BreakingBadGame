@@ -256,7 +256,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 bola.setVelocidadY(-velBola);
             }
         }
-        
+        //bola con meths
         for (int i = 0; i < numMeths; i++) {
             meth = (Meth) meths.get(i);
             if (bola.intersecta(meth)) {
@@ -288,6 +288,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
 
                     meth.setDestroyed(true);
                 }
+                meth.setDestroyed(true);
             }
         }
     }
@@ -377,6 +378,15 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void paint1(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
         g.setColor(Color.white);							// black font
+        
+        for (int i = 0; i < numMeths; i++) {
+            meth = (Meth) meths.get(i);
+            if (!meth.isDestroyed()) {
+                g.drawImage(meth.getImagen(), meth.getPosX(),
+                        meth.getPosY(), meth.getAncho(),
+                        meth.getAlto(), this);
+            }
+        }
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
