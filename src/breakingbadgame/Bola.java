@@ -20,6 +20,8 @@ public class Bola extends Base {
    private Animacion animBola;
    protected int posX;
    protected int posY;
+   private int velocidadY;
+   private int velocidadX;
 
    //protected String ball = "../images/ball.png";
    
@@ -31,10 +33,10 @@ public class Bola extends Base {
      * @param posY es la <code>posicion en y</code> del objeto.
      */
 
-   public Bola(int posX, int posY) {
+   public Bola(int posX, int posY,int velX, int velY) {
      super(posX, posY);
-     xdir = 1;
-     ydir = -1;
+     velocidadX = velX;
+     velocidadY = velY;
      Image bola = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("../images/ball.png"));
      
 //ImageIcon ii = new ImageIcon(this.getClass().getResource(ball));
@@ -74,7 +76,43 @@ public class Bola extends Base {
       posX = 230;
       posY = 355;
     }
+    
+    /**
+     * Metodo de acceso que regresa la velocidad en y del objeto
+     *
+     * @return velocidadX es la <code>velocidad en x</code> del objeto.
+     */
+    public int getVelocidadX() {
+        return velocidadX;
+    }
 
+    /**
+     * Metodo modificador usado para cambiar la velocidad en x del objeto
+     *
+     * @param t es la <code>velocidad en X</code> del objeto.
+     */
+    public void setVelocidadX(int t) {
+        velocidadX = t;
+    }
+
+    /**
+     * Metodo de acceso que regresa la velocidad en y del objeto
+     *
+     * @return velocidadY es la <code>velocidad en y</code> del objeto.
+     */
+    public int getVelocidadY() {
+        return velocidadY;
+    }
+
+    /**
+     * Metodo modificador usado para cambiar la velocidad en y del objeto
+     *
+     * @param t es la <code>velocidad en Y</code> del objeto.
+     */
+    public void setVelocidadY(int t) {
+        velocidadY = t;
+    }
+    
     /**
      * Metodo de acceso que regresa el ancho del icono
      *

@@ -147,6 +147,12 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void checaColision() {
         //Colision del bueno con el Applet 
+        if (bate.getPosX() + bate.getAncho() > getWidth()) {
+            bate.setPosX(getWidth() - bate.getAncho());
+        }
+        if (bate.getPosX() < 0) {
+            bate.setPosX(0);
+        }
     }
 
     
@@ -239,9 +245,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 g.drawString("      INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
                 g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
                 g.drawString("I - Instrucciones", getWidth() / 2 - 80, getHeight() / 2 + 40);
-                g.drawString("G - Grabar juego", getWidth() / 2 - 80, getHeight() / 2 + 60);
-                g.drawString("C - Cargar juego", getWidth() / 2 - 80, getHeight() / 2 + 80);
-                g.drawString("S - Activar/Desactivar sonido", getWidth() / 2 - 80, getHeight() / 2 + 100);
+                g.drawString("< - Moverse a la Izquierda", getWidth() / 2 - 80, getHeight() / 2 + 60);
+                g.drawString("> - Moverse a la Derecha", getWidth() / 2 - 80, getHeight() / 2 + 80);
             }
             if (pausa) {
                 g.drawString("PAUSA", bate.getPosX() + bate.getAncho(), bate.getPosY());
