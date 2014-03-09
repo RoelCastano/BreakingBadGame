@@ -27,6 +27,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private Bate bate;
     private int direccionBate; // Direccion del Bate
     boolean instrucciones;
+    private Bola bola;  //creacion del objeto bola
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -47,6 +48,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
+        bola = new Bola(100, 100);
 
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
@@ -238,6 +240,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void paint1(Graphics g) {
         if (bate != null) {
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
+            g.drawImage(bola.getImagen(), bola.getPosX(), bola.getPosY(), this);
             if (instrucciones) {
                 g.drawString("      INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
                 g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
