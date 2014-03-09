@@ -185,13 +185,14 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         
             if (bate.intersecta(bola)) {
 
-            int bateLPos = (int)bate.getPerimetro().getMinX();
-            int bolaLPos = (int)bola.getPerimetro().getMinX();
+            int bateLPos = bate.getPosX();/*(int)bate.getPerimetro().getMinX();*/
+            int bolaLPos = bola.getPosX();/*(int)bola.getPerimetro().getMinX();*/
+            int zona = bate.getAncho()/5;
 
-            int first = bateLPos + 8;
-            int second = bateLPos + 16;
-            int third = bateLPos + 24;
-            int fourth = bateLPos + 32;
+            int first = bateLPos + (zona);
+            int second = bateLPos + (zona*2);
+            int third = bateLPos + (zona*3);
+            int fourth = bateLPos + (zona*4);
 
             if (bolaLPos < first) {
                 bola.setVelocidadX(-3);
