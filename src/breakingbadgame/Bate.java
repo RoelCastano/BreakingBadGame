@@ -10,6 +10,6 @@ package breakingbadgame;
  *
  * @author roelcastano
  */
-public class Board {
+public class Bate {
     
 }
