@@ -171,19 +171,60 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             bate.setPosX(0);
         }
         //Colision de la bola con el JFrame
-        if (bola.getPosX() == 0) {
+        if (bola.getPosX() <= 0) {
             bola.setVelocidadX(3);
         }
         if (bola.getPosX() >= getWidth() ) { 
             bola.setVelocidadX(-3);
         }
-        if (bola.getPosY() <= 0 ) {
+        if (bola.getPosY() <= 20 ) {
             bola.setVelocidadY(3);
         }
         //Colision del bate con la bola
-        if (bate.intersecta(bola)) {
-            bola.setVelocidadX(+3);
-            bola.setVelocidadY(-3);
+
+        
+            if (bate.intersecta(bola)) {
+
+            int bateLPos = (int)bate.getPerimetro().getMinX();
+            int bolaLPos = (int)bola.getPerimetro().getMinX();
+
+            int first = bateLPos + 8;
+            int second = bateLPos + 16;
+            int third = bateLPos + 24;
+            int fourth = bateLPos + 32;
+
+            if (bolaLPos < first) {
+                bola.setVelocidadX(-3);
+                bola.setVelocidadY(-3);
+            }
+
+            if (bolaLPos >= first && bolaLPos < second) {
+                bola.setVelocidadX(-3);
+                if (bola.getVelocidadY()>0)
+                    bola.setVelocidadY(-3);
+                else
+                    bola.setVelocidadY(3);
+            }
+
+            if (bolaLPos >= second && bolaLPos < third) {
+                bola.setVelocidadX(0);
+                bola.setVelocidadY(-3);
+            }
+
+            if (bolaLPos >= third && bolaLPos < fourth) {
+                bola.setVelocidadX(3);
+                if (bola.getVelocidadY()>0)
+                    bola.setVelocidadY(-3);
+                else
+                    bola.setVelocidadY(3);
+            }
+
+            if (bolaLPos > fourth) {
+                bola.setVelocidadX(3);
+                bola.setVelocidadY(-3);
+            }
+
+
         }
             
     }
