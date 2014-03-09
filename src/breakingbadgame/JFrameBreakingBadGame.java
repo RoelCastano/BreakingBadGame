@@ -26,6 +26,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private Graphics dbg;	// Objeto grafico
     private Bate bate;
     private int direccionBate; // Direccion del Bate
+    boolean instrucciones;
     
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
@@ -45,6 +46,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         int posY = (int) (getHeight() - 60);    // posicion en y del carro
         bate = new Bate(posX, posY);
         direccionBate = 0;
+        instrucciones = false;
 
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
@@ -96,8 +98,10 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         tiempoActual = System.currentTimeMillis();
         /*vidas>0 && */
         while (true) {
-            actualiza();
-            checaColision();
+            if (!pausa) {
+                actualiza();
+                checaColision();
+            }
             repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
             try {
@@ -184,6 +188,13 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {    //Presiono flecha derecha
             direccionBate = 4;
         }
+        if (e.getKeyCode() == KeyEvent.VK_I) {
+            instrucciones = !instrucciones;
+        }
+        if (e.getKeyCode() == KeyEvent.VK_P) {
+            pausa = !pausa;
+        }
+
     }
 
     /**
@@ -221,6 +232,17 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void paint1(Graphics g) {
         if (bate != null) {
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
+            if (instrucciones) {
+                g.drawString("      INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
+                g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
+                g.drawString("I - Instrucciones", getWidth() / 2 - 80, getHeight() / 2 + 40);
+                g.drawString("G - Grabar juego", getWidth() / 2 - 80, getHeight() / 2 + 60);
+                g.drawString("C - Cargar juego", getWidth() / 2 - 80, getHeight() / 2 + 80);
+                g.drawString("S - Activar/Desactivar sonido", getWidth() / 2 - 80, getHeight() / 2 + 100);
+            }
+            if (pausa) {
+                g.drawString("PAUSA", bate.getPosX() + bate.getAncho(), bate.getPosY());
+            }
         } else {
             //Da un mensaje mientras se carga el dibujo	
             g.drawString("No se cargo la imagen..", 20, 20);
