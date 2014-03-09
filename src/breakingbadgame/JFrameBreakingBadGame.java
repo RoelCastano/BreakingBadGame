@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package breakingbadgame;
 
 import java.awt.Color;
@@ -24,9 +23,9 @@ import javax.swing.JFrame;
  * @author roelcastano
  */
 public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListener {
-    
+
     private long tiempoActual; //Variable que guarda el tiempo para la animacion.
-    boolean pausa; 
+    boolean pausa;
     boolean gameOver;
     private Image dbImage;	// Imagen a proyectar	
     private Graphics dbg;	// Objeto grafico
@@ -42,7 +41,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private int methsPorLinea;
     int velBola;
     int vidas;
-    
+
     public JFrameBreakingBadGame() {
         setTitle("Breaking Bad Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,7 +52,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         start();
 
     }
-    
+
     public void init() {
         setSize(640, 700);
         pausa = false;
@@ -67,16 +66,16 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         instrucciones = false;
         numMeths = 108;
         meths = new LinkedList();
-        methEx = new Meth(0,0);
-        methsPorLinea = getWidth() / (methEx.getAncho()+10);
-        for (int i = 0; i < numMeths+1; i++) {
+        methEx = new Meth(0, 0);
+        methsPorLinea = getWidth() / (methEx.getAncho() + 10);
+        for (int i = 0; i < numMeths + 1; i++) {
             int a = i % methsPorLinea;
-            int posMethX = ((methEx.getAncho()+5) * (a))+(5*a) + 20;
-            int posMethY = ((int)(i / methsPorLinea))*40 + 40; //(int) (30 * floor((95 * i) / 950)) + 80 + (int) floor((95 * i) / 950) * 20;
+            int posMethX = ((methEx.getAncho() + 5) * (a)) + (5 * a) + 20;
+            int posMethY = ((int) (i / methsPorLinea)) * 40 + 40; //(int) (30 * floor((95 * i) / 950)) + 80 + (int) floor((95 * i) / 950) * 20;
             meth = new Meth(posMethX, posMethY);
             meths.add(meth);
         }
-        bola = new Bola(getWidth()/2, getHeight()-30, velBola, velBola);
+        bola = new Bola(getWidth() / 2, getHeight() - 30, velBola, velBola);
         //Pinta el fondo del Applet de color amarillo		
         setBackground(Color.white);
         addKeyListener(this);
@@ -132,11 +131,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                     actualiza();
                     checaColision();
                 }
-                
+
             } else {
-                
+                gameOver = true;
             }
-            
+
             repaint();    // Se actualiza el <code>Applet</code> repintando el contenido.
 
             try {
@@ -164,9 +163,8 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
                 break;    //se mueve hacia arriba izquierda	
             }
         }
-        bola.setPosX(bola.getPosX()+bola.getVelocidadX());
-        bola.setPosY(bola.getPosY()+bola.getVelocidadY());
-        
+        bola.setPosX(bola.getPosX() + bola.getVelocidadX());
+        bola.setPosY(bola.getPosY() + bola.getVelocidadY());
 
         long tiempoTranscurrido = System.currentTimeMillis() - tiempoActual;
 
@@ -194,22 +192,21 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         if (bola.getPosX() <= 0) {
             bola.setVelocidadX(velBola);
         }
-        if (bola.getPosX() >= getWidth() - 30 ) { 
+        if (bola.getPosX() >= getWidth() - 30) {
             bola.setVelocidadX(-velBola);
         }
-        if (bola.getPosY() <= 20 ) {
+        if (bola.getPosY() <= 20) {
             bola.setVelocidadY(velBola);
         }
-        if (bola.getPosY() > getHeight()){
+        if (bola.getPosY() > getHeight()) {
             vidas--;
-            bola.setPosX(getWidth()/2);
-            bola.setPosY(getHeight()/10 * 8);
+            bola.setPosX(getWidth() / 2);
+            bola.setPosY(getHeight() / 10 * 8);
             bola.setVelocidadX(0);
             bola.setVelocidadY(-velBola);
         }
         //Colision del bate con la bola
 
-        
         if (bate.intersecta(bola)) {
 
             int bateLPos = bate.getPosX();/*(int)bate.getPerimetro().getMinX();*/
@@ -293,7 +290,6 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
         }
     }
 
-    
     /**
      * Metodo <I>update</I> sobrescrito de la clase <code>Applet</code>,
      * heredado de la clase Container.<P>
@@ -378,24 +374,21 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     public void paint1(Graphics g) {
         g.setFont(new Font("Helvetica", Font.PLAIN, 20));	// plain font size 20
         g.setColor(Color.white);							// black font
-        
-        for (int i = 0; i < numMeths; i++) {
-            meth = (Meth) meths.get(i);
-            if (!meth.isDestroyed()) {
-                g.drawImage(meth.getImagen(), meth.getPosX(),
-                        meth.getPosY(), meth.getAncho(),
-                        meth.getAlto(), this);
-            }
-        }
+
+        g.setColor(Color.black);							// black font
         if (bate != null) {
             g.drawImage(background, 0, -120, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
             g.drawImage(bola.getImagen(), bola.getPosX(), bola.getPosY(), this);
             for (int i = 0; i < numMeths; i++) {
-                Meth meth1 = (Meth) meths.get(i);
-                g.drawImage(meth1.getImagen(), meth1.getPosX(), meth1.getPosY(), this);
+                meth = (Meth) meths.get(i);
+                if (!meth.isDestroyed()) {
+                    g.drawImage(meth.getImagen(), meth.getPosX(),
+                            meth.getPosY(), meth.getAncho(),
+                            meth.getAlto(), this);
+                }
             }
-            g.drawString("Vidas: "+vidas, 40, getHeight()-20);
+            g.drawString("Vidas: " + vidas, 40, getHeight() - 20);
             if (instrucciones) {
                 g.drawString("INSTRUCCIONES       ", getWidth() / 2 - 80, getHeight() / 2);
                 g.drawString("P - Pausar/Jugar", getWidth() / 2 - 80, getHeight() / 2 + 20);
@@ -405,6 +398,9 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
             }
             if (pausa) {
                 g.drawString("PAUSA", bate.getPosX() + bate.getAncho(), bate.getPosY());
+            }
+            if (gameOver) {
+                g.drawString("GAME OVER", getWidth() / 2 - 40, getHeight() / 2);
             }
         } else {
             //Da un mensaje mientras se carga el dibujo	

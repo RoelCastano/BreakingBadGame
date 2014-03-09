@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package breakingbadgame;
 
 import java.awt.Image;
@@ -15,6 +14,7 @@ import javax.swing.ImageIcon;
  * @author roelcastano
  */
 public class Bate extends Base {
+
     protected Animacion animBate; //animacion del carro
     private int posX;    //posicion en x.       
     private int posY;    //posicion en y.
