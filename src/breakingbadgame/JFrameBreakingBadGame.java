@@ -9,6 +9,7 @@ package breakingbadgame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -30,6 +31,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     private int direccionBate; // Direccion del Bate
     boolean instrucciones;
     private Meth meth;
+    private Image background;			// Imagen de fondo
     private int numMeths;
     private Bola bola;  //creacion del objeto bola
     private LinkedList meths;
@@ -46,10 +48,11 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
     }
     
     public void init() {
-        setSize(900, 700);
+        setSize(640, 700);
         pausa = false;
         int posX = (int) (getWidth() / 2 - 30);    // posicion en x del carro en medio del JFrame
         int posY = (int) (getHeight() - 60);    // posicion en y del carro
+        background = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/background.jpg"));
         bate = new Bate(posX, posY);
         direccionBate = 0;
         instrucciones = false;
@@ -314,6 +317,7 @@ public class JFrameBreakingBadGame extends JFrame implements Runnable, KeyListen
      */
     public void paint1(Graphics g) {
         if (bate != null) {
+            g.drawImage(background, 0, -20, this);
             g.drawImage(bate.getImagen(), bate.getPosX(), bate.getPosY(), this);
             g.drawImage(bola.getImagen(), bola.getPosX(), bola.getPosY(), this);
             for (int i = 0; i < numMeths; i++) {
