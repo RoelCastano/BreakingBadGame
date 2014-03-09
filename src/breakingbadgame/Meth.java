@@ -25,7 +25,7 @@ public class Meth extends Base{
         super(posX, posY);	//constructor
         destroyed = false;
         //Se cargan las imágenes(cuadros) para la animación del malo
-        Image meth1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/brickie.png"));
+        Image meth1 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("/images/meths.gif"));
         //Image bueno2 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/1.gif"));
         //Image bueno3 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/2.gif"));
         //Image bueno4 = Toolkit.getDefaultToolkit().getImage(this.getClass().getResource("car/3.gif"));
